@@ -26,6 +26,9 @@ const Bio = () => {
           author
           social {
             twitter
+            linkedIn
+            gitHub
+            stackOverflow
           }
         }
       }
@@ -33,6 +36,7 @@ const Bio = () => {
   `)
 
   const { author } = data.site.siteMetadata
+  const { social } = data.site.siteMetadata
   return (
     <div
       style={{
@@ -57,9 +61,14 @@ const Bio = () => {
         <strong>{author}</strong> lives and works on the Sunshine Coast, Australia, and is 
         psyched on all things web.  Full-time developer. Full-time Dad.  Part-time surfer.
         {` `}
-        {/* <a href={`https://twitter.com/${social.twitter}`}>
+                {/* <a href={`https://twitter.com/${social.twitter}`}>
           You should follow him on Twitter
         </a> */}
+        <br/>
+        <a href={social.linkedIn}>LinkedIn</a>&nbsp;|&nbsp;
+        <a href={social.gitHub}>GitHub</a>&nbsp;|&nbsp;
+        <a href={social.stackOverflow}>Stack Overflow</a>&nbsp;|&nbsp;
+        <a href={social.twitter}>Twitter</a>
       </p>
     </div>
   )

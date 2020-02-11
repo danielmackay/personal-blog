@@ -5,7 +5,10 @@ module.exports = {
     description: `Personal blog for Daniel Mackay`,
     siteUrl: `https://gatsby-starter-blog-demo.netlify.com/`,
     social: {
-      twitter: `daniel_mackay`,
+      twitter: 'https://twitter.com/daniel_mackay',
+      linkedIn: 'https://www.linkedin.com/in/danieljamesmackay/',
+      gitHub: 'https://github.com/danielmackay',
+      stackOverflow: 'https://stackoverflow.com/users/676220/daniel-mackay'
     },
   },
   plugins: [
@@ -47,12 +50,13 @@ module.exports = {
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
-    {
-      resolve: `gatsby-plugin-google-analytics`,
-      options: {
-        //trackingId: `ADD YOUR TRACKING ID HERE`,
-      },
-    },
+    // TODO: Add back in once I have a GA key
+    // {
+    //   resolve: `gatsby-plugin-google-analytics`,
+    //   options: {
+    //     //trackingId: `ADD YOUR TRACKING ID HERE`,
+    //   },
+    // },
     `gatsby-plugin-feed`,
     {
       resolve: `gatsby-plugin-manifest`,
