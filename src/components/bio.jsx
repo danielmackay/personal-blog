@@ -8,6 +8,7 @@
 import React from "react"
 import { useStaticQuery, graphql } from "gatsby"
 import Image from "gatsby-image"
+import Social from "./social/social"
 
 import { rhythm } from "../utils/typography"
 
@@ -60,15 +61,8 @@ const Bio = () => {
       <p>
         <strong>{author}</strong> lives and works on the Sunshine Coast, Australia, and is 
         psyched on all things web.  Full-time developer. Full-time Dad.  Part-time surfer.
-        {` `}
-                {/* <a href={`https://twitter.com/${social.twitter}`}>
-          You should follow him on Twitter
-        </a> */}
         <br/>
-        <a href={social.linkedIn}>LinkedIn</a>&nbsp;|&nbsp;
-        <a href={social.gitHub}>GitHub</a>&nbsp;|&nbsp;
-        <a href={social.stackOverflow}>Stack Overflow</a>&nbsp;|&nbsp;
-        <a href={social.twitter}>Twitter</a>
+        <Social social={social} />
       </p>
     </div>
   )
