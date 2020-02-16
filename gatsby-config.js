@@ -1,14 +1,14 @@
 module.exports = {
   siteMetadata: {
-    title: `Web Dev Blog`,
+    title: "Daniel Mackay | Blog",
     author: `Daniel Mackay`,
     description: `Personal blog for Daniel Mackay`,
     siteUrl: `https://gatsby-starter-blog-demo.netlify.com/`,
     social: {
-      twitter: 'https://twitter.com/daniel_mackay',
-      linkedIn: 'https://www.linkedin.com/in/danieljamesmackay/',
-      gitHub: 'https://github.com/danielmackay',
-      stackOverflow: 'https://stackoverflow.com/users/676220/daniel-mackay'
+      twitter: "https://twitter.com/daniel_mackay",
+      linkedIn: "https://www.linkedin.com/in/danieljamesmackay/",
+      gitHub: "https://github.com/danielmackay",
+      stackOverflow: "https://stackoverflow.com/users/676220/daniel-mackay",
     },
   },
   plugins: [
@@ -42,7 +42,17 @@ module.exports = {
               wrapperStyle: `margin-bottom: 1.0725rem`,
             },
           },
-          `gatsby-remark-prismjs`,
+          {
+            resolve: `gatsby-remark-prismjs`,
+            options: {
+              inlineCodeMarker: ">",
+              prompt: {
+                user: "root",
+                host: "localhost",
+                global: false,
+              },
+            },
+          },
           `gatsby-remark-copy-linked-files`,
           `gatsby-remark-smartypants`,
         ],
