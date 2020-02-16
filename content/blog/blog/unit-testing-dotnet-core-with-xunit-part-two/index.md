@@ -1,6 +1,6 @@
 ---
 title: Unit Testing .NET Core with XUnit - Part Two
-date: "2020-02-11"
+date: "2020-02-16"
 description: "Unit Testing .NET Core with xUnit, NSubstitute, and Fluent Assertions"
 ---
 
@@ -170,6 +170,9 @@ And if you are testing a collection:
 - and many more!
 
 As you can see Fluent Assertions provides far more test helpers than what is built into xUnit (and MSTest / NUnit).  For more info see the [documentation](https://fluentassertions.com/introduction).
+
+## Code
+The code for this article can be found on [Git Hub](https://github.com/danielmackay/dotnet-core-xunit)
 
 ## Resources
 - [xUnit](https://xunit.net/)

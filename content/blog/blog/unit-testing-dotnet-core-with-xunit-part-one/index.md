@@ -143,6 +143,9 @@ To expand on the potentially huge setup required, lets consider our cart example
 
 It's probably no suprise that I prefer Unit Tests.  However, Integration Tests can have a place if you really need to test data access code, or API integration.
 
+## Code
+The code for this article can be found on [Git Hub](https://github.com/danielmackay/dotnet-core-xunit)
+
 ## Resources
 - [xUnit](https://xunit.net/)
 
