@@ -1,9 +1,9 @@
 module.exports = {
   siteMetadata: {
     title: "Dan Does Code",
-    author: `Daniel Mackay`,
-    description: `Personal blog for Daniel Mackay`,
-    siteUrl: `https://gatsby-starter-blog-demo.netlify.com/`,
+    author: "Daniel Mackay",
+    description: "Personal blog for Daniel Mackay",
+    siteUrl: "http://www.dandoescode.com/",
     social: {
       twitter: "https://twitter.com/daniel_mackay",
       linkedIn: "https://www.linkedin.com/in/danieljamesmackay/",
@@ -71,8 +71,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `Daniel Mackay Blog`,
-        short_name: `Blog`,
+        name: `Dan Does Code`,
+        short_name: `Dan Does Code`,
         start_url: `/`,
         background_color: `#ffffff`,
         theme_color: `#663399`,
