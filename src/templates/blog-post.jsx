@@ -1,21 +1,22 @@
-import React from "react"
+import React from "react" 
 import { Link, graphql } from "gatsby"
+import { Disqus } from 'gatsby-plugin-disqus'
 
 import Bio from "../components/bio"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { rhythm, scale } from "../utils/typography"
 
-// const ListLink = props => (
-//   <li style={{ display: `inline-block`, marginRight: `1rem` }}>
-//     <Link to={props.to}>{props.children}</Link>
-//   </li>
-// )
-
 const BlogPostTemplate = ({ data, pageContext, location }) => {
   const post = data.markdownRemark
   const siteTitle = data.site.siteMetadata.title
+  const siteUrl = data.site.siteMetadata.siteUrl;
   const { previous, next } = pageContext
+  const disqusConfig = {
+    url: `${siteUrl+location.pathname}`,
+    identifier: post.id,
+    title: post.frontmatter.title,
+  }
 
   return (
     <Layout location={location} title={siteTitle}>
@@ -33,11 +34,6 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
           >
             {post.frontmatter.title}
           </h1>
-          {/* <ul style={{ listStyle: `none`, float: `right` }}>
-            <ListLink to="/">Blog</ListLink>
-            <ListLink to="/about-me/">About Me</ListLink>
-            <ListLink to="/contact/">Contact</ListLink>
-          </ul> */}
           <p
             style={{
               ...scale(-1 / 5),
@@ -45,7 +41,7 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
               marginBottom: rhythm(1),
             }}
           >
-            {post.frontmatter.date} | <span style={{opacity: 0.5}}>{post.timeToRead} min read</span>
+            {post.frontmatter.date} | <span style={{opacity: 0.5}}>{post.timeToRead} min read</span>            
           </p>
         </header>
         <section dangerouslySetInnerHTML={{ __html: post.html }} />
@@ -56,6 +52,7 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
         />
         <footer>
           <Bio />
+          <Disqus config={disqusConfig} />
         </footer>
       </article>
 
@@ -96,6 +93,7 @@ export const pageQuery = graphql`
     site {
       siteMetadata {
         title
+        siteUrl
       }
     }
     markdownRemark(fields: { slug: { eq: $slug } }) {
