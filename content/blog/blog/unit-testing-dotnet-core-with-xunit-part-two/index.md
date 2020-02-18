@@ -4,12 +4,12 @@ date: "2020-02-16"
 description: "Unit Testing .NET Core with xUnit, NSubstitute, and Fluent Assertions"
 ---
 
-This is Part Two of a Two Part series on Unit Testing .NET Core with XUnit.
+This is Part Two of a Two-Part Series on Unit Testing .NET Core with XUnit.
 
-In this part I will cover mocking with NSubstitute and writing better assertions with Fluent Assertions.
+In this part, I will cover mocking with NSubstitute and writing better assertions with Fluent Assertions.
 
 ## NSubstitute
-Most classes that does anything non-trivial will ususally have dependencies.  These dependencies could access the network, disk, database, or themselves might have dependencies that access these also.  The rabbit hole can get pretty deep, pretty quick here.  When unit testing, we want to abstract these depedencies away for two reasons.
+Most classes that do anything non-trivial will usually have dependencies.  These dependencies could access the network, disk, database, or themselves might have dependencies that access these also.  The rabbit hole can get pretty deep, pretty quick here.  When unit testing, we want to abstract these dependencies away for two reasons.
 1. It allows our tests to concentrate on our Subject Under Test (SUT)
 2. It allows our tests to be run easier, without having dependencies on databases etc
 3. It allows our tests to run much quicker, which ultimately gives us feedback on broken code faster 
@@ -59,7 +59,7 @@ public class OrderLine
 }
 ```
 
-In order to unit test the Cart, we need to mock out the repository.  First, let's install NSubstitute:
+To unit test the Cart, we need to mock out the repository.  First, let's install NSubstitute:
 
 ```bash
 Install-Package NSubstitute
@@ -120,12 +120,12 @@ public class CartTests
 }
 ```
 
-Here we are replacing the usual implementation of `ICartRepository` with out own.  When the `Cart` calls `ICartRepository.GetAll` internally, we are stubbing out this method to return our own known data.  This allows the database to be bypassed and at the same time gives our tests predecitable results.  This is very powerful.
+Here we are replacing the usual implementation of `ICartRepository` with our own.  When the `Cart` calls `ICartRepository.GetAll` internally, we are stubbing out this method to return our known data.  This allows the database to be bypassed and at the same time gives our tests predictable results.  This is very powerful.
 
-If you find that you are having to mock out a large number of dependencies in order to write out a unit test, that is indication that your class is probably doing too many things.  You might want to refactor it and split out the functionality so that it does only one thing, but does it well (Single Responsibility Principle).
+If you find that you are having to mock out a large number of dependencies in order to write out a unit test, that is an indication that your class is probably doing too many things.  You might want to refactor it and split out the functionality so that it does only one thing, but does it well (Single Responsibility Principle).
 
 ## Fluent assertions
-Now, we are in a great position.  We have unit tests for our code, they are runningg fast, and we are mocking out external resources.  There is still one kink for us to iron out.  Let's look at our assertions
+Now, we are in a great position.  We have unit tests for our code, they are running fast, and we are mocking out external resources.  There is still one kink for us to iron out.  Let's look at our assertions
 
 ```csharp
 Assert.Equal(110, result);
@@ -145,7 +145,7 @@ Once installed we can change our assertion to:
 result.Should().Be(110);
 ```
 
-This reads much more naturally left-to-right.  First we reference what we want to test. `result`.  Then we add `Should()` which is the secret sauce to opening up Fluence Assertions.  In this case we are simply using `Be()` for the actual test which is equivalent to `Assert.Equal()` above.
+This reads much more naturally left-to-right.  First, we reference what we want to test. `result`.  Then we add `Should()` which is the secret sauce to opening up Fluence Assertions.  In this case, we are simply using `Be()` for the actual test which is equivalent to `Assert.Equal()` above.
 
 Some other tests provided are:
 - `BeGreaterThan()`
@@ -180,9 +180,9 @@ The code for this article can be found on [Git Hub](https://github.com/danielmac
 - [Fluent Assertions](https://fluentassertions.com/)
 
 ## Summary
-This is the end of the two part series on Unit Testing with .NET Core and xUnit.  In this article you've seen how to easily mock out depedencies with NSubstitute, and how to test a wider range of assertions with Fluent Assertions.
+This is the end of the two-part series on Unit Testing with .NET Core and xUnit.  In this article, you've seen how to easily mock out dependencies with NSubstitute, and how to test a wider range of assertions with Fluent Assertions.
 
-I hope ths series has demonstrated that unit testing is not that hard.  Having an understanding of how to test, can help us write better code (e.g. by ensuring dependencies are injected and not hardcoded).
+I hope this series has demonstrated that unit testing is not that hard.  Having an understanding of how to test, can help us write better code (e.g. by ensuring dependencies are injected and not hardcoded).
 
 
 
