@@ -3,7 +3,7 @@ module.exports = {
     title: "Dan Does Code",
     author: "Daniel Mackay",
     description: "Personal blog for Daniel Mackay",
-    siteUrl: "http://www.dandoescode.com/",
+    siteUrl: "https://www.dandoescode.com/",
     social: {
       twitter: "https://twitter.com/daniel_mackay",
       linkedIn: "https://www.linkedin.com/in/danieljamesmackay/",
