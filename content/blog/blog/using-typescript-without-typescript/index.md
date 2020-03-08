@@ -1,12 +1,14 @@
 ---
 title: Using Typescript Without Typescript
-date: "2020-03-01"
+date: "2020-03-07"
 description: "How to enable Typescript checking of Javascript files in VS Code with JSDoc"
 ---
 
 I'm a big fan of Typescript.  I like to use it in all my projects where possible.  Typescript provides error reporting and type checking of your Javascript/Typescript code.  It also provides you with intellisense and safe refactoring in the form of *quick fixes*.  It's your first line of defence against erronious code.  Another benefit of Typescript is that it allows you to use the latest Javascript language features when writing your code, but the output is down-compiled to javascript that all browsers support.  Neat.
 
 However, not all frontend projects are set up to use Typescript.  Wouldn't it be great to get the benefits of Typescript without forcing this on your entire project (and team) and without adding a new tool into your frontend build process?  With VS Code and JSDoc - you can!
+
+*Update March 8 - removed excludes from tsconfig.json and jsconfig.json as these are covered by the defaults.  Added example of using type declaration files.  Added repo for source code.*
 
 ## Setup
 
@@ -29,8 +31,7 @@ The next option to enable type checking globally is via a `jsconfig.json`.  If t
 {
   "compilerOptions": {
     "checkJs": true
-  },
-  "exclude": ["node_modules", "**/node_modules/*"]
+  }
 }
 ```
 
@@ -109,6 +110,46 @@ And then used where necessary:
 	}
 ```
 
+Another option is to move these types to their own type declaration file.  e.g. `main.d.ts`
+
+```ts
+export interface ICreditNoteTaxRequestViewModel{
+    orderID: number;
+    shippingCredit: number;
+    lines: IICreditNoteTaxLineViewModel[]
+}
+
+export interface ICreditNoteTaxLineViewModel{
+    originalOrderLineID:number;
+    creditQuantity: number;
+}
+
+export interface ICreditNoteTaxResponseViewModel{
+    feeAmount: number;
+    inclGst: number;
+    subTotal: number;
+    total: number;
+}
+
+export interface IApiResponse{
+    status: string;
+    status: message;
+    response: ICreditNoteTaxResponseViewModel;
+}
+```
+
+These types can then be referenced in your Javascript as follows:
+
+```jsdoc
+  /**
+   * @param {import("./main").ICreditNoteTaxRequestViewModel} req
+   * @returns {Promise<import("./main").IApiResponse>}
+   */
+  function createCreditNoteTaxApiCall(req) {
+    /// snip
+    return;
+  }
+```
 
 ### Adding Types to inline code
 The above solves the problem of adding types to function inputs and outputs.  We can do something similar with inline JsDoc comments:
@@ -146,8 +187,7 @@ If you decide to start migrating from a Javascript project with some Typescript,
   "compilerOptions": {
     "allowJs": true,
     "checkJs": true
-  },
-  "exclude": ["node_modules", "**/node_modules/*"]
+  }
 }
 ```
 
@@ -157,6 +197,9 @@ Once Typescript is enabled in your project, you can start renaming your `*.js` f
 In this article, you've seen how easy it is to get some of the benefits of Typescript in a Javascript project with only the help of VS Code.  This approach allows you to keep your current build process exactly as is to avoid disruption and without having to convince your team to go all in.
 
 Later on, if you decide you want to invest more into using Typescript, it is easy to convert to full Typescript and start converting your Javascript files to Typescript files.
+
+## Code
+The code for this article can be found on [Git Hub](https://github.com/danielmackay/using-typescript-without-typescript)
 
 
 ## Resources
