@@ -58,12 +58,12 @@ const Bio = () => {
           borderRadius: `50%`,
         }}
       />
-      <p>
-        <strong>{author}</strong> lives and works on the Sunshine Coast, Australia, and is 
-        psyched on all things web.  Full-time developer. Full-time Dad.  Part-time surfer.
-        <br/>
-        <Social social={social} />
-      </p>
+        <p>
+            <strong>{author}</strong> lives and works on the Sunshine Coast, Australia, and is 
+            psyched on all things web.  Full-time developer. Full-time Dad.  Part-time surfer.
+            <br/>
+            <Social social={social} />
+        </p>
     </div>
   )
 }
