@@ -29,7 +29,7 @@ const BlogIndex = ({ data, location }) => {
                 </Link>
               </h3>
               {/* <small>{node.frontmatter.date} | {node.timeToRead} min read </small> */}
-              <small>{node.frontmatter.date}</small> | <small style={{opacity: 0.5}}>{node.timeToRead} min read </small>
+              <small>{node.frontmatter.date}</small> | <small style={{opacity: 0.5}}>{node.timeToRead * 2} min read </small>
             </header>
             <section>
               <p

@@ -42,7 +42,7 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
               marginBottom: rhythm(1),
             }}
           >
-            {post.frontmatter.date} | <span style={{opacity: 0.5}}>{post.timeToRead} min read</span>            
+            {post.frontmatter.date} | <span style={{opacity: 0.5}}>{post.timeToRead * 2} min read</span>            
           </p>
         </header>
         <MDXRenderer>{post.body}</MDXRenderer>
