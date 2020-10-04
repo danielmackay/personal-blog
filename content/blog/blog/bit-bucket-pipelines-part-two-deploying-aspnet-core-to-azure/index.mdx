@@ -11,6 +11,34 @@ import PipelinesSeriesResources from "../../../components/pipelines-series-resou
 
 ## Intro
 
+## Packaging
+- asp.net core project
+- package on push to master
+- "remember, our pipeline is running on a linux docker image.  This allows us to run any linux CLI command during the build
+
+## Deployment
+- asp.net core project
+- package on push to master
+- optional deployment to QA
+- optional deployment to Staging
+- optional deployment to Prod
+
+- cover pipes
+  - Azure web app
+  - Azure blob storage
+  - Azure function app
+  - Slack
+
+  ## Advanced Pipelines
+- Parallel builds
+- Max build time
+- use cache
+- services
+  - can spin up separate docker containers for things like databases
+- manual triggers
+- YAML anchors
+  - can be used to re-use chunks of YAML configuration
+
 ## Summary
 
 <PipelinesSeriesResources />

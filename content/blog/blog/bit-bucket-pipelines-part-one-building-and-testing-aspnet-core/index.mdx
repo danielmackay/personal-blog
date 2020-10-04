@@ -12,18 +12,20 @@ import PipelinesSeriesResources from "../../../components/pipelines-series-resou
 
 ## Intro
 
-Bit Bucket pipelines is a hosted CI/CD platform that allows you to build, test, and deploy your code without managing any build servers.  All builds are done within a docker image on linux.
+Bit Bucket pipelines is a hosted CI/CD platform that allows you to build, test, and deploy your code without the pain of having to manage your own build servers.  All builds are done within a docker image on Linux.  You can use the default image, but most of the time you will be specifying your own docker image depending on your build needs.  Lets dive in.
 
 ## Pipeline Basics
 
-You start by creating a ```bitbucket-pipelines.yml``` file in the root of your project.  Bit bucket will help you to scaffold out this file based on the type of code in your repo.  This file has the following structure:
+You start by creating a ```bitbucket-pipelines.yml``` file in the root of your project.  You can do this manually within your favourite editor, but I find it easier to do this online with Bit Bucket as it will help you to scaffold out this file based on the type of code in your repo.  This file has the following structure:
 
 ![YAML Structure](./yml-structure.png)
 *Source: Atlassian*
 
 First we have the ```image```.  This is the docker image that will be used for your build.  For .NET Core we will use ```microsoft/dotnet:sdk```.  For a javascript project we would use ```node:10.15.3```.
 
-Next we have the ```pipelines```.  Each pipeline will consist of one or more ```step``` sections.  Each step will be run within a clean image.  By default they will use the image specified at the top of your YAML file, but you can even use different build images for different steps.  For example, you might have a repo consisting of both ASP.NET Core and React.  You could use a dotnet image for the website, and a node image for React all within the same YAML file.
+Next we have the ```pipelines```.  Each pipeline will consist of one or more ```step``` sections.  Each step will be run within a clean image.  Initially it might seem to have a step for every task you need your pipeline to do, but bear in mind that there is an overhead with having to instantiate the docker image for every step.  This means that you can chew through a lot of the precious bit bucket minutes in your allowance if you're not careful.
+
+By default each step will use the image specified at the top of your YAML file, but you can even use different build images for different steps.  For example, you might have a repo consisting of both ASP.NET Core and React.  You could use a dotnet image for the website, and a node image for React all within the same YAML file.
 
 The pipelines can be triggered in different ways by using ***sections***.  The simplest is to have a ```default``` section, which will trigger on every push for all branches that don't match a pipeline definition in other sections.  For more control, you might like to use a ```branches``` section to have different steps on develop vs master.  You might also like to use ```tags``` to control the flow of your pipeline.  Considering you only get a limited number of build minutes, instead of building on each commit, you might want to reduce this by only building pull requests via the ```pull-request``` section.
 
@@ -148,7 +150,7 @@ Check that the tests run by running the following from the repo root directory.
 dotnet test
 ```
 
-Lastly we will add our test step into pipelines.  We'll also add a name to the step so that it is more descriptive.
+Lastly, we will add our test step into pipelines.  We'll also add a name to the step so that it is more descriptive.
 
 ```yaml
 image: mcr.microsoft.com/dotnet/core/sdk:3.1
@@ -163,7 +165,6 @@ pipelines:
           - dotnet restore
           - dotnet build
           - dotnet test
-
 ```
 
 Too easy!  Now if we push our code we will see the tests being run by pipelines.
@@ -174,34 +175,9 @@ And in the details pane we can see that all 3 of our tests have passed
 
 ![Test Details](./test-details.png)
 
-## Packaging
-- asp.net core project
-- package on push to master
-- "remember, our pipeline is running on a linux docker image.  This allows us to run any linux CLI command during the build
-
-## Deployment
-- asp.net core project
-- package on push to master
-- optional deployment to QA
-- optional deployment to Staging
-- optional deployment to Prod
-
-- cover pipes
-  - Azure web app
-  - Azure blob storage
-  - Azure function app
-  - Slack
-
-## Advanced Pipelines
-- Parallel builds
-- Max build time
-- use cache
-- services
-  - can spin up separate docker containers for things like databases
-- manual triggers
-- YAML anchors
-  - can be used to re-use chunks of YAML configuration
-
 ## Summary
+After completing the above we now have a Bit Bucket Continuous Integration Pipeline that builds and tests our .NET Core application on every commit.  We've seen how to change the docker image based on the type of code we're building.  And also how to trigger builds based on different condtions like pull requests or specific branches. And best of all we don't have any build servers to manage!
+
+In my next article I'll cover how to use Bit Bucket Pipelines to package up a .NET Core application and publish it to Azure.
 
 <PipelinesSeriesResources />
