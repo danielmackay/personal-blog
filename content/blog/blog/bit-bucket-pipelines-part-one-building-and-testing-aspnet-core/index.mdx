@@ -1,7 +1,7 @@
 ---
 #title: Deploying ASP.NET Core with Bit Bucket Pipelines
 title: "Bit Bucket Pipelines - Part 1: Building and Testing ASP.NET Core"
-date: "2020-09-11"
+date: "2020-10-25"
 description: "Building and testing ASP.NET Core code using Bit Bucket Pipelines"
 ---
 
@@ -23,7 +23,7 @@ You start by creating a ```bitbucket-pipelines.yml``` file in the root of your p
 
 First we have the ```image```.  This is the docker image that will be used for your build.  For .NET Core we will use ```microsoft/dotnet:sdk```.  For a javascript project we would use ```node:10.15.3```.
 
-Next we have the ```pipelines```.  Each pipeline will consist of one or more ```step``` sections.  Each step will be run within a clean image.  Initially it might seem to have a step for every task you need your pipeline to do, but bear in mind that there is an overhead with having to instantiate the docker image for every step.  This means that you can chew through a lot of the precious bit bucket minutes in your allowance if you're not careful.
+Next we have the ```pipelines```.  Each pipeline will consist of one or more ```step``` sections.  Each step will be run within a clean image.  Initially it might seem like a good idea to have a separate step for every task you need your pipeline to do, but bear in mind that there is an overhead with having to instantiate the docker image for every step.  This means that you can chew through a lot of the precious bit bucket minutes in your allowance if you're not careful.
 
 By default each step will use the image specified at the top of your YAML file, but you can even use different build images for different steps.  For example, you might have a repo consisting of both ASP.NET Core and React.  You could use a dotnet image for the website, and a node image for React all within the same YAML file.
 
@@ -64,7 +64,7 @@ Razor page website:
 
 ![Website Running](./website-running.png)
 
-Push the code to Bit Bucket, and lets create our first pipeline:
+Push the code to Bit Bucket, and let's create our first pipeline:
 
 ![Create a Pipeline](./pipelines-menu.png)
 
@@ -176,8 +176,8 @@ And in the details pane we can see that all 3 of our tests have passed
 ![Test Details](./test-details.png)
 
 ## Summary
-After completing the above we now have a Bit Bucket Continuous Integration Pipeline that builds and tests our .NET Core application on every commit.  We've seen how to change the docker image based on the type of code we're building.  And also how to trigger builds based on different condtions like pull requests or specific branches. And best of all we don't have any build servers to manage!
+After completing the above we now have a Bit Bucket Continuous Integration Pipeline that builds and tests our .NET Core application on every commit.  We've seen how to change the docker image based on the type of code we're building.  And also how to trigger builds based on different conditions like pull requests or specific branches. And best of all we don't have any build servers to manage!
 
-In my next article I'll cover how to use Bit Bucket Pipelines to package up a .NET Core application and publish it to Azure.
+In Part 2, I'll cover how to use Bit Bucket Pipelines to package up a .NET Core application and publish it to Azure.
 
 <PipelinesSeriesResources />
