@@ -19,3 +19,9 @@ jobs:
       uses: jzweifel/gatsby-cli-github-action@master
       with:
         gatsby-arg: build
+    - uses: tibor19/static-website-deploy@v1
+    - name: Deploy to Azure Storage
+      with:
+        enabled-static-website: 'true'
+        folder: 'public'
+        connection-string: ${{ secrets.BLOB_CONNECTING_STRING }}
