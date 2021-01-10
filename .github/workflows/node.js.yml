@@ -24,4 +24,5 @@ jobs:
       with:
         enabled-static-website: 'true'
         folder: 'public'
+        remove-existing-files: 'true'
         connection-string: ${{ secrets.BLOB_CONNECTING_STRING }}
